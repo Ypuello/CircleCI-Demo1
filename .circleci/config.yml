@@ -81,9 +81,6 @@ jobs:
 workflows:
   validates:
     jobs:
-      - only:
-          refs:
-              - master
       - special-tests
       - code-review:
           requires:
