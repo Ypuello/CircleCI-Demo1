@@ -5,22 +5,86 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
+  special-tests:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: cimg/base:stable
+      - image: circleci/node:latest
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-
+          name: Install Dependencies
+          command: . build/install_dependencies.sh
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json "}}
+          paths:
+            - node_modules
+      - run:
+          name: Login to Org
+          command: . build/login_to_devorg.sh
+      - run:
+          name: Run Apex Tests
+          command: . build/run_apex_tests.sh
+      - store_test_results:
+          path: test-results
+  code-review:
+      docker:
+        - image: circleci/node:latest
+      steps:
+        - checkout
+        - restore_cache:
+            keys:
+              - dependency-cache-{{ checksum "package.json "}}
+              - dependency-cache-
+        - run:
+            name: Install Dependencies
+            command: . build/install_dependencies.sh
+        - save_cache:
+            key: dependency-cache-{{ checksum "package.json "}}
+            paths:
+              - node_modules
+        - run:
+            name: Login to Org
+            command: . build/login_to_devorg.sh
+        - run:
+            name: SFDX Scanner Analysis
+            command: . build/run_sfdx_scanner.sh
+        - store_artifacts:
+            path: sfdxscannerAnalysis.csv
+  deploy-code:
+      docker:
+        - image: circleci/node:latest
+      steps:
+        - checkout
+        - restore_cache:
+            keys:
+              - dependency-cache-{{ checksum "package.json "}}
+              - dependency-cache-
+        - run:
+            name: Install Dependencies
+            command: . build/install_dependencies.sh
+        - save_cache:
+            key: dependency-cache-{{ checksum "package.json "}}
+            paths:
+              - node_modules
+        - run:
+            name: Login to Org
+            command: . build/login_to_devorg.sh
+        - run:
+            name: Deploy to Org
+            command: . build/deploy_code.sh
+            
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  validate:
     jobs:
-      - say-hello
+      - special-tests
+      - code-review:
+          requires:
+            - special-tests
+      - deploy-code:
+          requires:
+            - code-review
