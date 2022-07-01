@@ -2,7 +2,7 @@ echo "Installing JDK"
 sudo apt-get install software-properties-common
 sudo apt-get update
 sudo add-apt-repository ppa:openjdk-r/ppa
-sudo apt-get install openjdk-8-jre
+sudo apt-get install openjdk-8-jdk
 
 echo "Install SFDX Scanner"
 echo -e 'y/n' | sfdx plugins:install @salesforce/sfdx-scanner
