@@ -1,6 +1,7 @@
 echo "Installing JDK"
-sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get install software-properties-common
 sudo apt-get update
+sudo add-apt-repository ppa:openjdk-r/ppa
 sudo apt-get install openjdk-8-jre
 
 echo "Install SFDX Scanner"
