@@ -79,6 +79,8 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
+ rules:
+    - if: '$CI_MERGE_REQUEST_APPROVED == "master"'
   validates:
     jobs:
       - special-tests
