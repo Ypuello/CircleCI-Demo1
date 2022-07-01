@@ -1,4 +1,6 @@
 echo "Installing JDK"
+sudo apt update
+sudo apt install default-jre
 sudo apt-get install openjdk-8-jdk
 
 echo "Install SFDX Scanner"
