@@ -1,5 +1,4 @@
 echo "Installing JDK"
-sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:webpd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
