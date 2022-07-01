@@ -1,8 +1,8 @@
 echo "Installing JDK"
-apt-get update && \
-apt-get install -y openjdk-8-jdk && \
-apt-get install -y ant && \
-apt-get clean
+sudo apt-get update && \
+sudo apt-get install -y openjdk-8-jdk && \
+sudo apt-get install -y ant && \
+sudo apt-get clean
 #sudo apt-get install openjdk-8-jdk
 
 echo "Install SFDX Scanner"
