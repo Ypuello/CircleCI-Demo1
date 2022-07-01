@@ -81,17 +81,17 @@ workflows:
       - special-tests:
           filters:
             branches:
-              only: Developer
+              only: master
       - code-review:
           filters:
             branches:
-              only: Developer
+              only: master
           requires:
             - special-tests
       - deploy-code:
             filters:
               branches:
-                only: Main
+                only: master
             requires:
             - code-review
             
