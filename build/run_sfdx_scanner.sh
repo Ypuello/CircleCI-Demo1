@@ -1,5 +1,4 @@
 echo "Installing JDK"
-sudo apt-get update
 sudo apt-get update --allow-releaseinfo-change
 sudo apt-get install openjdk-8-jdk
 
