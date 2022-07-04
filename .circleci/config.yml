@@ -63,10 +63,22 @@ workflows:
   validates:
     jobs:
       - special-tests:
-      - code-review:  
+          filters:
+            branches:
+              only:
+                - master
+      - code-review:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - special-tests
       - deploy-code:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - code-review
             
