@@ -65,5 +65,5 @@ workflows:
       - special-tests
       - deploy-code:
           requires:
-            - code-review
+            - special-tests
             
