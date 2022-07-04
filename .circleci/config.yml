@@ -63,9 +63,6 @@ workflows:
   validates:
     jobs:
       - special-tests
-      - code-review:
-          requires:
-            - special-tests
       - deploy-code:
           requires:
             - code-review
