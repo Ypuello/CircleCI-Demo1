@@ -3,7 +3,7 @@
     <fullName>demo1__c</fullName>
     <externalId>false</externalId>
     <label>demo1</label>
-    <length>12</length>
+    <length>20</length>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackTrending>false</trackTrending>
