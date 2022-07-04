@@ -60,25 +60,16 @@ jobs:
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   version: 2.1
+  rules:
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   validates:
     jobs:
       - special-tests:
-          filters:
-            branches:
-              only:
-                - master
       - code-review:
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - special-tests
       - deploy-code:
-          filters:
-            branches:
-              only:
-                - master
+
           requires:
             - code-review
             
