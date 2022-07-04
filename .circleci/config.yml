@@ -13,6 +13,10 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
+      - run:
+          name: Build and Publish Images
+          command: |
+            - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       - checkout
       - run:
           name: Install Dependencies
@@ -62,20 +66,11 @@ workflows:
   version: 2.1
   validates:
     jobs:
-      - special-tests:
-          filters:
-            branches:
-              only: master
+      - special-tests
       - code-review:
-          filters:
-            branches:
-              only: master
           requires:
             - special-tests
       - deploy-code:
-            filters:
-              branches:
-                only: master
-            requires:
+          requires:
             - code-review
             
