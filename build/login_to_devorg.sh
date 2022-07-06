@@ -1,4 +1,4 @@
-echo "Loggin into dev Salesforce Org"
+echo "Logging into dev Salesforce Org"
 mkdir keys
 echo $DEVORG_CERT_KEY | base64 -di > keys/server.key
 
