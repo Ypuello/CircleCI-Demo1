@@ -45,8 +45,9 @@ jobs:
       docker:
         - image: circleci/node:latest
       steps:
-        - name: Hello Worl Message
-        - command: echo "Hello World!"
+        - run: 
+          - name: Hello Worl Message
+          - command: echo "Hello World!"
             
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
