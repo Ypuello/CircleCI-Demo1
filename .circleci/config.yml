@@ -46,8 +46,8 @@ jobs:
         - image: circleci/node:latest
       steps:
         - run: 
-          - name: Hello Worl Message
-          - command: echo "Hello World!"
+           name: Hello Worl Message
+           command: echo "Hello World!"
             
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
