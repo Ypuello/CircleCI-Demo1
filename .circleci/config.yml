@@ -59,7 +59,7 @@ jobs:
             command: . build/deploy_code.sh
   print-message:
       docker:
-        - image: circleci/node:lastest
+        - image: circleci/node:latest
       steps:
         - run:
             name: Display Welcome Message
