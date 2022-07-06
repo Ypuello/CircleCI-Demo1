@@ -41,6 +41,13 @@ jobs:
         - run:
             name: Deploy to Org
             command: . build/deploy_code.sh
+  message-test:
+      docker:
+        - image: circleci/node:latest
+      steps:
+        - run: 
+           name: Hello Worl Message
+           command: echo "Hello World!"
             
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -48,6 +55,7 @@ workflows:
   version: 2.1
   validates:
     jobs:
+      - message-test
       - special-tests:
           filters:
             branches:
