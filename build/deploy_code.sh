@@ -5,4 +5,4 @@
 #fdx force:mdapi:deploy -u DevHub -d deploy_code/ -w -1 -l RunSpecifiedTests --runtests AccountTriggerHandlerTest 
 
 echo "Deploying code to org"
-sfdx force:mdapi:deploy --wait 10 --deploydir force-app --targetusername UAT --testlevel $TESTLEVEL
+sfdx force:mdapi:deploy -u DevHub --deploydir force-app -w -1 -l RunSpecifiedTests --runtests AccountTriggerHandlerTest
